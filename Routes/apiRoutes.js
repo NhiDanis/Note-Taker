@@ -1,5 +1,5 @@
 const fs = require('fs');
-let notesData = JSON.parse(fs.writeFileSync("../db/db.json"), "utf8");
+let notesData = JSON.parse(fs.readFileSync("./db/db.json"), "utf8");
 
 module.exports = (app) => {
 
@@ -27,5 +27,19 @@ module.exports = (app) => {
 
     });
 
-    
+    app.delete("/api/notes/:id", (req, res) => {
+        let noteID = req.param.id;
+        let newNoteId = 0;
+        console.log (`Delete Note!! ${noteID}`);
+        notesData = notesData.filter(currentNote =>{
+            return currentNote.id != noteID;
+        });
+        for(currentNote of notesData) {
+            currentNote.id = newNoteId.toString();
+            newNoteId++;
+        }
+
+        fs.writeFileSync("./db/db.json", JSON.stringify(notesData));
+        res.json(notesData);
+    });
 }
