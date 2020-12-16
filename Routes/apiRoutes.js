@@ -1,5 +1,5 @@
 const fs = require('fs');
-let notesData = JSON.parse(fs.readFileSync("./db/db.json"), "utf8");
+let notesData = JSON.parse(fs.readFileSync('./db/db.json'), "utf8");
 
 module.exports = (app) => {
 
