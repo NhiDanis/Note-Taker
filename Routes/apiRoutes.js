@@ -8,7 +8,7 @@ module.exports = (app) => {
     });
 
     app.get("/api/notes/:id", (req, res) => {
-        res.json(notesData[Number(req.param.id)]);
+        res.json(notesData[Number(req.params.id)]);
     });
 
     app.post("/api/notes", (req, res) => {
@@ -28,8 +28,8 @@ module.exports = (app) => {
     });
 
     app.delete("/api/notes/:id", (req, res) => {
-        let noteID = req.param.id;
-        let newNoteId = 0;
+        let noteID = req.params.id;
+        let newNoteId = [];
         console.log (`Delete Note!! ${noteID}`);
         notesData = notesData.filter(currentNote =>{
             return currentNote.id != noteID;
